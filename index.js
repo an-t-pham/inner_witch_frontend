@@ -31,11 +31,11 @@ function getDeck() {
     const container = document.getElementById('cards-container') 
     const pickedCards = [];
     for(let i = 0; i < 23; i++) {
-        const card = document.createElement("div")
-        const instruction = document.getElementById("instruction")
-        card.className = "card"
-        card.id = i
-        card.innerHTML = `<img src="https://di9xswf8hewf3.cloudfront.net/images/Tarot/Decks/TarotOfDreams/back.jpg" />`
+        const card = document.createElement("div");
+        const instruction = document.getElementById("instruction");
+        card.className = "card";
+        card.id = i;
+        card.innerHTML = `<img src="https://di9xswf8hewf3.cloudfront.net/images/Tarot/Decks/TarotOfDreams/back.jpg" />`;
           card.addEventListener("click", () => {
             if (pickedCards.length < 5) {
                 card.classList.add("pick-card");
@@ -58,11 +58,21 @@ function getDeck() {
     }
 
       
-       
+      
     
     
 }
 
-function pickCard(card) {
-    
+function getReading() {
+    const instruction = document.getElementById("instruction");
+
+    if (instruction.innerHTML == "Get Your Reading! >>" ) {
+       instruction.addEventListener("click", () => {
+           const reading = [];
+           for (let i = 0; i < 6; i++) {
+               const num = Math.floor(Math.random() * 5) + 1;
+               reading.push(num);
+           }
+       })
+    }
 }
