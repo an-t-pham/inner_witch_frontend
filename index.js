@@ -1,20 +1,23 @@
-const endPoint = "http://localhost:3000/api/v1/cards"
+const BASE_URL = "http://localhost:3000/api/v1"
+const CARDS_URL = `${BASE_URL}/cards`
+const RANDOMS_URL = `${BASE_URL}/randoms`
 
 document.addEventListener('DOMContentLoaded', () => {
-   getDeck()
+   getDeck();
+      
 });
 
 function getCard() {
-    fetch(endPoint)
+    fetch(CARDS_URL)
    .then(resp => resp.json())
    .then(cards => {
      cards.data.forEach(card => renderCard(card))
+   
     }) 
 }
 
 function renderCard(card) {
-    const cardHTML= `
-    <div data-id=${card.id}>
+    return `<div data-id=${card.id}>
       <img src=${card.attributes.image} height="100%" width="250">
       <h3>Name: ${card.attributes.name}</h3>
        <ul>
@@ -27,22 +30,35 @@ function renderCard(card) {
 
 }
 
-function getDeck() {
+function getRandomCards() {
+    return fetch(RANDOMS_URL)
+   .then(resp => resp.json())
+   .then(randoms => {
+       return randoms.card_ids
+      
+   }) 
+}
+
+async function getDeck() {
     const container = document.getElementById('cards-container') 
     const pickedCards = [];
-    for(let i = 0; i < 23; i++) {
+    const randomCards =  await getRandomCards();
+
+   
+    for(let i = 0; i < randomCards.length; i++) {
         const card = document.createElement("div");
         const instruction = document.getElementById("instruction");
         card.className = "card";
-        card.id = i;
+        card.id = randomCards[i];
         card.innerHTML = `<img src="https://di9xswf8hewf3.cloudfront.net/images/Tarot/Decks/TarotOfDreams/back.jpg" />`;
           card.addEventListener("click", () => {
-            if (pickedCards.length < 5) {
+            if (pickedCards.length < 5 && !pickedCards.includes(card.id)) {
                 card.classList.add("pick-card");
                 pickedCards.push(card.id);
                
                 if (pickedCards.length == 5) {
                     instruction.innerHTML ='<h2>' + `Get Your Reading! >>` + '</h2>';
+                    instruction.addEventListener("click", (e) => createReadingHandler(e))
                 } else {
                     instruction.innerHTML ='<h2>' + `${5 - pickedCards.length} cards left to pick!` + '</h2>';
                 }
@@ -53,26 +69,24 @@ function getDeck() {
                     card.classList.remove("pick-card")
                 }
             }
+           
           })
+        
           container.appendChild(card);
+
+          function createReadingHandler(e) {
+            e.preventDefault()
+            console.log(pickedCards.map(c => parseInt(c)))
+            // console.log(pickedCards)
+          }
     }
 
-      
       
     
     
 }
 
-function getReading() {
-    const instruction = document.getElementById("instruction");
 
-    if (instruction.innerHTML == "Get Your Reading! >>" ) {
-       instruction.addEventListener("click", () => {
-           const reading = [];
-           for (let i = 0; i < 6; i++) {
-               const num = Math.floor(Math.random() * 5) + 1;
-               reading.push(num);
-           }
-       })
-    }
-}
+   
+    // console.log(document.getElementsByClassName('pick-card')[0].id)
+  // return r;
