@@ -31,13 +31,13 @@ body {
     cursor: pointer;
   }
   
-  img {
+  .card img {
     border-radius: 2rem;
     box-shadow: 4px 4px 15px 2px rgba(black, 0.75);
     width: 100%;
   }
 
-  .header {
+  #header {
     text-align: center;
   }
 
@@ -46,4 +46,17 @@ body {
     background: plum;
     text-align: center;
     
+  }
+
+  #reading-container {
+    display: flex;
+  }
+
+  .reading-card-img {
+    width: 15%;
+
+  }
+
+  .reading-card-text {
+     display: flex;
   }
