@@ -9,28 +9,26 @@ class Card {
         this.image = image;
     }
 
-    renderCard() {
+    renderCard(cardPositionName) {
+        const rev = Math.floor(Math.random() * Math.floor(2));
+
         const content = 
-        // `<div id=${this.id}>
-        //    <div class="reading-card-img">
-        //      <img src=${this.image} height="50%" width="125">
-        //    </div>
-  
-        //    <div class="reading-card-text">
-             `<h3>${this.name}</h3>
+             `<h2>${cardPositionName}</h2>
+             <h3>${this.name}</h3>
               <ul>
                 <li>Type: ${this.card_type}</li>
-                <li id="meaning">Meaning: ${this.meaning_up}</li>
+                <li>Meaning: ${rev ? this.meaning_rev : this.meaning_up}</li>
                 <li>Description: ${this.description}</li>
               </ul>`
-            //   </div>
-        //   </div>
-        //  <br><br>`;
+       
+         const readingContainer = document.getElementById("reading-container")
          const card = document.createElement("div");
          card.id = `${this.id}`;
+         card.className = "reading-card-row";
 
          const img =  document.createElement("div");
          img.className = "reading-card-img";
+         if (rev) { img.style.transform = "rotate(180deg)" };
          img.innerHTML = `<img src=${this.image} height="50%" width="125">`;
 
          const text = document.createElement("div");
@@ -39,12 +37,9 @@ class Card {
          
          card.appendChild(img);
          card.appendChild(text);
-
-        const rev = Math.floor(Math.random() * Math.floor(max));
-        if (rev === 1) {
-            document.getElementById("id").style.transform = "rotate(180deg)";
-            
-        }
+         
+         readingContainer.appendChild(card);
+     
         return card;
     }         
 }

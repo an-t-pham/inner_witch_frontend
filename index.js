@@ -42,7 +42,7 @@ async function getDeck() {
         const instruction = document.getElementById("instruction");
         card.className = "card";
         card.id = randomCards[i];
-        card.innerHTML = `<img src="https://di9xswf8hewf3.cloudfront.net/images/Tarot/Decks/TarotOfDreams/back.jpg" />`;
+        card.innerHTML = `<img src="https://scontent.fltn3-1.fna.fbcdn.net/v/t1.0-9/161131568_10218879958857117_6901733784538859194_n.jpg?_nc_cat=100&ccb=1-3&_nc_sid=730e14&_nc_ohc=wf9LX1RKug4AX_V3qjl&_nc_ht=scontent.fltn3-1.fna&oh=5f80b32bddbe1e083a615558ba6a2dfe&oe=6076CDB6" />`;
             card.addEventListener("click", () => {
                if (pickedCards.length < 5 && !pickedCards.includes(card.id)) {
                   card.classList.add("pick-card");
@@ -51,8 +51,10 @@ async function getDeck() {
                   if (pickedCards.length == 5) {
                       instruction.innerHTML ='<h2>' + `Get Your Reading! >>` + '</h2>';
                       instruction.addEventListener("click", (e) => createReadingHandler(e))
+                  } else if (pickedCards.length == 4) {
+                      instruction.innerHTML ='<h2>' + `1 card left to pick!` + '</h2>';
                   } else {
-                      instruction.innerHTML ='<h2>' + `${5 - pickedCards.length} cards left to pick!` + '</h2>';
+                    instruction.innerHTML ='<h2>' + `${5 - pickedCards.length} cards left to pick!` + '</h2>';
                   }
 
                 } else {
@@ -90,16 +92,16 @@ function postFetch(cards_in_position) {
     })
     .then(resp => resp.json())
     .then(reading => {
-        const current_situation = new Card(reading.data.attributes.current_situation);
-        const tasks_at_hand = new Card(reading.data.attributes.tasks_at_hand);
-        const new_challenges =  new Card(reading.data.attributes.new_challenges);
-        const strength =  new Card(reading.data.attributes.strength);
-        const ideal_outcome =  new Card(reading.data.attributes.ideal_outcome);
+        const past = new Card(reading.data.attributes.past);
+        const present = new Card(reading.data.attributes.present);
+        const future =  new Card(reading.data.attributes.future);
+        const reason =  new Card(reading.data.attributes.reason);
+        const potential =  new Card(reading.data.attributes.potential);
         const instruction = document.getElementById("instruction");
         const cardContainer = document.getElementById("cards-container");
         const readingContainer = document.getElementById("reading-container");
         const header = document.getElementById("header");
-        // readingContainer.innerHTML = current_situation.renderCard();
+        // readingContainer.innerHTML = past.renderCard();
 
         // readingContainer.appendChild(test.renderCard())
 
@@ -108,14 +110,19 @@ function postFetch(cards_in_position) {
         instruction.style.backgroundColor = "white";
         cardContainer.innerHTML = " ";
         
+        
         // const cardRow = document.createElement("div");
         // cardRow.className = "reading-card-row";
-        const cardRow = document.getElementsByClassName("reading-card-row");
-        cardRow[0].innerHTML = current_situation.renderCard();
-        cardRow[1].innerHTML = tasks_at_hand.renderCard();
-        cardRow[2].innerHTML = new_challenges.renderCard();
-        cardRow[3].innerHTML = strength.renderCard();
-        cardRow[4].innerHTML = ideal_outcome.renderCard();
+        document.getElementById("reading-container").innerHTML = " ";
+        // const cardRow = document.getElementsByClassName("reading-card-row");
+        // cardRow[0].innerHTML = 'Current Situation';
+        past.renderCard('Card 1 represents the Past');
+        // cardRow[1].innerHTML = 'Tasks at hand';
+        present.renderCard('Card 2 represents the Present');
+        future.renderCard('Card 3 represents the Future');
+        reason.renderCard('Card 4 represents core Reason of the circumstance');
+        potential.renderCard('Card 5 represents Potential Outcome of situation');
+        
 
     })
 }

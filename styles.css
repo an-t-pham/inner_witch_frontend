@@ -3,6 +3,30 @@ body {
     margin: 0;
     display: grid;
     place-items: center;
+    
+    /* height: 100%;
+    overflow: hidden; */
+   
+    font-family: Verdana, sans-serif;
+    
+  }
+
+  #background-image {
+     background-image: url(https://media1.popsugar-assets.com/files/thumbor/xnLgVRiLdcuzCBFc0v-Db-rfec4/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2020/10/15/688/n/1922507/512c796a17f55a52_GettyImages-1192840389/i/Crystal-Ball-Zoom-Background.jpg);
+     /* background-repeat: no-repeat; */
+     background-size: cover;
+     color: 	#9588cd;
+     width: 100%;
+     height: 100%;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+  }
+
+  #header {
+    font-size: 40px;
+    font-family: 'Brush Script MT', cursive;
   }
   #cards-container {
     display: flex;
@@ -32,7 +56,7 @@ body {
   }
   
   .card img {
-    border-radius: 2rem;
+    /* border-radius: 1rem; */
     box-shadow: 4px 4px 15px 2px rgba(black, 0.75);
     width: 100%;
   }
@@ -43,13 +67,18 @@ body {
 
   #instruction {
     width: 500px;
-    background: plum;
+    background:#88c0cd;
     text-align: center;
-    
+    padding: 5px;
+    margin: 50px;
+    position: center;
+  
   }
 
   #reading-container {
     display: flex;
+    /* flex-direction: column; */
+    flex-flow: column wrap;
   }
 
   .reading-card-img {
