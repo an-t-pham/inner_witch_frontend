@@ -50,6 +50,7 @@ async function getDeck() {
                
                   if (pickedCards.length == 5) {
                       instruction.innerHTML ='<h2>' + `Get Your Reading! >>` + '</h2>';
+                      instruction.style.cursor = "pointer";
                       instruction.addEventListener("click", (e) => createReadingHandler(e))
                   } else if (pickedCards.length == 4) {
                       instruction.innerHTML ='<h2>' + `1 card left to pick!` + '</h2>';
@@ -101,19 +102,22 @@ function postFetch(cards_in_position) {
         const cardContainer = document.getElementById("cards-container");
         const readingContainer = document.getElementById("reading-container");
         const header = document.getElementById("header");
+        
+
         // readingContainer.innerHTML = past.renderCard();
 
         // readingContainer.appendChild(test.renderCard())
 
         header.innerHTML = '<h2>' + `Here is the interpretation of your reading...` + '</h2>';
+        header.style.color = "pink";
         instruction.innerHTML = " ";
-        instruction.style.backgroundColor = "white";
+        instruction.style.backgroundColor = "transparent";
         cardContainer.innerHTML = " ";
         
         
         // const cardRow = document.createElement("div");
         // cardRow.className = "reading-card-row";
-        document.getElementById("reading-container").innerHTML = " ";
+        readingContainer.innerHTML = " ";
         // const cardRow = document.getElementsByClassName("reading-card-row");
         // cardRow[0].innerHTML = 'Current Situation';
         past.renderCard('Card 1 represents the Past');

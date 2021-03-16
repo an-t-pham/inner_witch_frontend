@@ -29,11 +29,16 @@ class Card {
          const img =  document.createElement("div");
          img.className = "reading-card-img";
          if (rev) { img.style.transform = "rotate(180deg)" };
-         img.innerHTML = `<img src=${this.image} height="50%" width="125">`;
+         img.innerHTML = `<img src=${this.image} width="100%">`;
 
          const text = document.createElement("div");
          text.className = "reading-card-text";
          text.innerHTML = content;
+         text.style.backgroundColor = "darkslateblue";
+         text.style.opacity = "0.6";
+         text.style.padding = "20px";
+         text.style.color = "pink";
+         text.style.marginRight = "20px";
          
          card.appendChild(img);
          card.appendChild(text);

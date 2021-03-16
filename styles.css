@@ -81,11 +81,20 @@ body {
     flex-flow: column wrap;
   }
 
+  .reading-card-row {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    margin: 48px 0px;
+    grid-gap: 20px;
+  }
+
   .reading-card-img {
-    width: 15%;
+    width: 100%;
+    grid-column: 1/2;
 
   }
 
   .reading-card-text {
      display: flex;
+     flex-direction: column;
   }
