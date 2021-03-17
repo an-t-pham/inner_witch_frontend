@@ -21,7 +21,6 @@ function getCard() {
     return fetch(RANDOM_CARD_URL)
     .then(resp => resp.json())
     .then(card => {
-        console.log(card)
         const newCard = new Card(card.data.attributes)
        return newCard.renderCard()
     })
@@ -33,6 +32,7 @@ function cardOftheDay() {
     pickACard.addEventListener("click", (e) => {
         e.preventDefault();
         getCard();
+        refreshBtn();
     })
 }
 
@@ -48,7 +48,7 @@ function renderReading(reading) {
         const readingContainer = document.getElementById("reading-container");
         const header = document.getElementById("header");
         const o = document.getElementById("or");
-       
+        
 
         header.innerHTML = '<h2>' + `Here is the interpretation of your reading...` + '</h2>';
         header.style.color = "pink";
@@ -63,7 +63,7 @@ function renderReading(reading) {
         cardsContainer.innerHTML = " ";
         o.innerHTML = " ";
         
-        
+        refreshBtn();
         
         readingContainer.innerHTML = " ";
         
@@ -138,6 +138,25 @@ async function getDeck() {
       }
     
 }
+
+function refreshBtn() {
+    const refresh = document.getElementById("refresh")
+    const btn = document.createElement("BUTTON");
+    btn.addEventListener("click", (e) => createRefreshHandler(e));
+    btn.innerHTML = "Start Again";
+    btn.style.backgroundColor = "#9588cd";
+    btn.style.color = "pink";
+    btn.style.padding = "10px";
+    btn.style.marginBottom = "20px";
+    btn.style.fontSize = "20px";
+    refresh.appendChild(btn);
+}
+
+
+function createRefreshHandler(e) {
+    e.preventDefault();
+    window.location.reload();
+  }
 
 function getStarted() {
     getDeck();
