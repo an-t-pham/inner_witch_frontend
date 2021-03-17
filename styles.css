@@ -3,12 +3,7 @@ body {
     margin: 0;
     display: grid;
     place-items: center;
-    
-    /* height: 100%;
-    overflow: hidden; */
-   
     font-family: Verdana, sans-serif;
-    
   }
 
   #background-image {
@@ -65,7 +60,7 @@ body {
     text-align: center;
   }
 
-  #instruction {
+  .introduction-button {
     width: 500px;
     background:#88c0cd;
     text-align: center;
@@ -77,7 +72,6 @@ body {
 
   #reading-container {
     display: flex;
-    /* flex-direction: column; */
     flex-flow: column wrap;
   }
 
@@ -85,7 +79,6 @@ body {
     display: grid;
     grid-template-columns: 1fr 5fr;
     margin: 48px 0px;
-    grid-gap: 20px;
   }
 
   .reading-card-img {
@@ -98,3 +91,22 @@ body {
      display: flex;
      flex-direction: column;
   }
+
+  #card-container {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    margin: 48px 0px;
+  }
+
+  #card-img {
+    width: 100%;
+    grid-column: 1/2;
+    grid-row: 1/2;
+  }
+
+  #card-text {
+    grid-column: 2/3;
+    display: flex;
+    flex-direction: column;
+  }
+

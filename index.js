@@ -1,35 +1,94 @@
 const BASE_URL = "http://localhost:3000/api/v1"
-const CARDS_URL = `${BASE_URL}/cards`
-const RANDOMS_URL = `${BASE_URL}/randoms`
+const RANDOM_CARD_URL = `${BASE_URL}/random_card`
+const RANDOM_CARDS_URL = `${BASE_URL}/random_cards`
 const READINGS_URL = `${BASE_URL}/readings`
 
 
 document.addEventListener('DOMContentLoaded', () => {
-   getDeck();
-      
+   getStarted();  
 });
 
-// function getCard() {
-//     fetch(CARDS_URL)
-//    .then(resp => resp.json())
-//    .then(cards => {
-//      cards.data.forEach(card => renderCard(card))
-   
-//     }) 
-// }
-
-
-
-// }
 
 function getRandomCards() {
-    return fetch(RANDOMS_URL)
+    return fetch(RANDOM_CARDS_URL)
    .then(resp => resp.json())
-   .then(randoms => {
-       return randoms.card_ids
-      
+   .then(random => {
+       return random.card_ids
    }) 
 }
+
+function getCard() {
+    return fetch(RANDOM_CARD_URL)
+    .then(resp => resp.json())
+    .then(card => {
+        console.log(card)
+        const newCard = new Card(card.data.attributes)
+       return newCard.renderCard()
+    })
+}
+
+function cardOftheDay() {
+    const pickACard = document.getElementById("pick-a-card");
+    pickACard.style.cursor = "pointer";
+    pickACard.addEventListener("click", (e) => {
+        e.preventDefault();
+        getCard();
+    })
+}
+
+function renderReading(reading) {
+       const past = new Card(reading.data.attributes.past);
+        const present = new Card(reading.data.attributes.present);
+        const future =  new Card(reading.data.attributes.future);
+        const reason =  new Card(reading.data.attributes.reason);
+        const potential =  new Card(reading.data.attributes.potential);
+
+        const introduction = document.getElementsByClassName("introduction-button");
+        const cardsContainer = document.getElementById("cards-container");
+        const readingContainer = document.getElementById("reading-container");
+        const header = document.getElementById("header");
+        const o = document.getElementById("or");
+       
+
+        header.innerHTML = '<h2>' + `Here is the interpretation of your reading...` + '</h2>';
+        header.style.color = "pink";
+
+        for (let i = 0; i < introduction.length; i++) {
+            introduction[i].innerHTML = " ";
+            const s = introduction[i].style;
+            s.backgroundColor = "transparent";
+            s.padding = 0;
+            s.margin = 0;
+        }
+        cardsContainer.innerHTML = " ";
+        o.innerHTML = " ";
+        
+        
+        
+        readingContainer.innerHTML = " ";
+        
+        past.renderReadingCard('Card 1 represents the Past');
+        present.renderReadingCard('Card 2 represents the Present');
+        future.renderReadingCard('Card 3 represents the Future');
+        reason.renderReadingCard('Card 4 represents core Reason of the circumstance');
+        potential.renderReadingCard('Card 5 represents Potential Outcome of situation');
+}
+
+function postReadingFetch(cards_in_position) {
+    fetch(READINGS_URL, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify({
+            cards_in_position: cards_in_position
+        })
+    })
+    .then(resp => resp.json())
+    .then(reading => renderReading(reading))
+}
+
 
 async function getDeck() {
     const container = document.getElementById('cards-container') 
@@ -75,58 +134,12 @@ async function getDeck() {
     function createReadingHandler(e) {
         e.preventDefault();
         const pickedCardIds = pickedCards.map(c => parseInt(c));
-        postFetch(pickedCardIds);
+        postReadingFetch(pickedCardIds);
       }
     
 }
 
-function postFetch(cards_in_position) {
-    fetch(READINGS_URL, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        },
-        body: JSON.stringify({
-            cards_in_position: cards_in_position
-        })
-    })
-    .then(resp => resp.json())
-    .then(reading => {
-        const past = new Card(reading.data.attributes.past);
-        const present = new Card(reading.data.attributes.present);
-        const future =  new Card(reading.data.attributes.future);
-        const reason =  new Card(reading.data.attributes.reason);
-        const potential =  new Card(reading.data.attributes.potential);
-        const instruction = document.getElementById("instruction");
-        const cardContainer = document.getElementById("cards-container");
-        const readingContainer = document.getElementById("reading-container");
-        const header = document.getElementById("header");
-        
-
-        // readingContainer.innerHTML = past.renderCard();
-
-        // readingContainer.appendChild(test.renderCard())
-
-        header.innerHTML = '<h2>' + `Here is the interpretation of your reading...` + '</h2>';
-        header.style.color = "pink";
-        instruction.innerHTML = " ";
-        instruction.style.backgroundColor = "transparent";
-        cardContainer.innerHTML = " ";
-        
-        
-        // const cardRow = document.createElement("div");
-        // cardRow.className = "reading-card-row";
-        readingContainer.innerHTML = " ";
-        // const cardRow = document.getElementsByClassName("reading-card-row");
-        // cardRow[0].innerHTML = 'Current Situation';
-        past.renderCard('Card 1 represents the Past');
-        // cardRow[1].innerHTML = 'Tasks at hand';
-        present.renderCard('Card 2 represents the Present');
-        future.renderCard('Card 3 represents the Future');
-        reason.renderCard('Card 4 represents core Reason of the circumstance');
-        potential.renderCard('Card 5 represents Potential Outcome of situation');
-        
-
-    })
+function getStarted() {
+    getDeck();
+    cardOftheDay();
 }
