@@ -16,6 +16,9 @@ function getRandomCards() {
    .then(random => {
        return random.card_ids
    }) 
+   .catch(err => {
+    document.getElementById("message").innerHTML = err.message
+})
 }
 
 function getCard() {
@@ -24,6 +27,9 @@ function getCard() {
     .then(card => {
         const newCard = new Card(card.data.attributes)
        return newCard.renderCard()
+    })
+    .catch(err => {
+        document.getElementById("message").innerHTML = err.message
     })
 }
 
@@ -109,6 +115,9 @@ function postReadingFetch(cards_in_position) {
     })
     .then(resp => resp.json())
     .then(reading => renderReading(reading))
+    .catch(err => {
+        document.getElementById("message").innerHTML = err.message
+    })
 }
 
 
