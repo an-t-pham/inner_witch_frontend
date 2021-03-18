@@ -5,7 +5,8 @@ const READINGS_URL = `${BASE_URL}/readings`
 
 
 document.addEventListener('DOMContentLoaded', () => {
-   getStarted();  
+    getDeck();
+    cardOftheDay(); 
 });
 
 
@@ -25,6 +26,27 @@ function getCard() {
        return newCard.renderCard()
     })
 }
+
+function createRefreshHandler(e) {
+    e.preventDefault();
+    window.location.reload();
+  }
+
+function refreshBtn() {
+    const refresh = document.getElementById("refresh")
+    const btn = document.createElement("BUTTON");
+    btn.addEventListener("click", (e) => createRefreshHandler(e));
+    btn.innerHTML = "Start Again";
+    btn.style.backgroundColor = "#9588cd";
+    btn.style.color = "pink";
+    btn.style.padding = "10px";
+    btn.style.marginBottom = "20px";
+    btn.style.fontSize = "20px";
+    btn.style.cursor = "pointer";
+    refresh.appendChild(btn);
+}
+
+
 
 function cardOftheDay() {
     const pickACard = document.getElementById("pick-a-card");
@@ -139,26 +161,3 @@ async function getDeck() {
     
 }
 
-function refreshBtn() {
-    const refresh = document.getElementById("refresh")
-    const btn = document.createElement("BUTTON");
-    btn.addEventListener("click", (e) => createRefreshHandler(e));
-    btn.innerHTML = "Start Again";
-    btn.style.backgroundColor = "#9588cd";
-    btn.style.color = "pink";
-    btn.style.padding = "10px";
-    btn.style.marginBottom = "20px";
-    btn.style.fontSize = "20px";
-    refresh.appendChild(btn);
-}
-
-
-function createRefreshHandler(e) {
-    e.preventDefault();
-    window.location.reload();
-  }
-
-function getStarted() {
-    getDeck();
-    cardOftheDay();
-}
