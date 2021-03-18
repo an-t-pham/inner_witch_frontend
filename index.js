@@ -149,6 +149,7 @@ async function getDeck() {
              })
         
           container.appendChild(card);
+          container.style.paddingTop = "100px";
 
           
     }
