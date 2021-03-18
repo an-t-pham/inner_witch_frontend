@@ -6,7 +6,7 @@ A Single Application for Tarot Reading. This is the frontend of the app.
 
  Installing
 
-1. Fork and clone backend repository (follow installing instruction in backend repo README).
+1. Fork and clone https://github.com/anpham148/inner_witch_backend/ (follow installing instruction in backend repo README).
 2. Fork and clone this repository.
 3. Run 'open index.html' in your terminal.
 4. The page will be openned on your default browser.
