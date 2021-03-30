@@ -110,4 +110,13 @@ body {
     flex-direction: column;
   }
 
+  #refresh-button {
+    background-color: #9588cd;
+    color: pink;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 20px;
+    cursor: pointer;
+  }
+
 

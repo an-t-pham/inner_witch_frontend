@@ -43,12 +43,7 @@ function refreshBtn() {
     const btn = document.createElement("BUTTON");
     btn.addEventListener("click", (e) => createRefreshHandler(e));
     btn.innerHTML = "Start Again";
-    btn.style.backgroundColor = "#9588cd";
-    btn.style.color = "pink";
-    btn.style.padding = "10px";
-    btn.style.marginBottom = "20px";
-    btn.style.fontSize = "20px";
-    btn.style.cursor = "pointer";
+    btn.id = "refresh-button";
     refresh.appendChild(btn);
 }
 
