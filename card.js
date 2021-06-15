@@ -59,7 +59,7 @@ class Card {
         const cardsContainer = document.getElementById("cards-container");
         const readingContainer = document.getElementById("reading-container");
         const o = document.getElementById("or");
-        const refresh = document.getElementById("refresh");
+        
         
         cardsContainer.innerHTML = " ";
         readingContainer.innerHTML = " ";

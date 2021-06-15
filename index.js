@@ -7,8 +7,14 @@ const READINGS_URL = `${BASE_URL}/readings`
 document.addEventListener('DOMContentLoaded', () => {
     getDeck();
     cardOftheDay(); 
+    const userCmtForm = document.querySelector("#user-comment-form")
+    userCmtForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const cmt = document.getElementById("user-text")
+      const comment = document.getElementById("user-comment")
+      comment.innerHTML = cmt.value
+})
 });
-
 
 function getRandomCards() {
     return fetch(RANDOM_CARDS_URL)
@@ -127,7 +133,7 @@ async function getDeck() {
         const instruction = document.getElementById("instruction");
         card.className = "card";
         card.id = randomCards[i];
-        card.innerHTML = `<img src="https://scontent.fltn3-1.fna.fbcdn.net/v/t1.0-9/161131568_10218879958857117_6901733784538859194_n.jpg?_nc_cat=100&ccb=1-3&_nc_sid=730e14&_nc_ohc=wf9LX1RKug4AX_V3qjl&_nc_ht=scontent.fltn3-1.fna&oh=5f80b32bddbe1e083a615558ba6a2dfe&oe=6076CDB6" />`;
+        card.innerHTML = `<img src="./IMG_1281.jpg" />`;
             card.addEventListener("click", () => {
                if (pickedCards.length < 5 && !pickedCards.includes(card.id)) {
                   card.classList.add("pick-card");
