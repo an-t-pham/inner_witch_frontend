@@ -1,5 +1,5 @@
 # WELCOME TO INNERWITCH!
-![alt text](./background.jpg) </br>
+![alt text](./background.png) </br>
  Summary
 
 A Single Page Application for Tarot Reading. This is the frontend of the app. 
