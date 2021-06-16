@@ -1,8 +1,8 @@
 # WELCOME TO INNERWITCH!
-
+![alt text](./IMG_1281.png) </br>
  Summary
 
-A Single Application for Tarot Reading. This is the frontend of the app. 
+A Single Page Application for Tarot Reading. This is the frontend of the app. 
 
  Installing
 
