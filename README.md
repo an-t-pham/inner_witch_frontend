@@ -2,7 +2,7 @@
 ![alt text](./background.png) </br>
  Summary
 
-A Single Page Application for Tarot Reading. Users have 2 options either pick 1 card which will be the card of the day or 5 cards to have a full tarot reading about their past/current situation/challenges/weakness/best outcome. This is the frontend of the app. 
+A Single Page Application for Tarot Reading. Users have 2 options either pick 1 card which will be the card of the day or 5 cards to have a full tarot reading about their past/current situation/challenges/weakness/best outcome. This frontend of the app is built with Vanilla JS. 
 
 
  Installing
